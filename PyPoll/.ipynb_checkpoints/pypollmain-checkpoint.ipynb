@@ -2,7 +2,7 @@
  "cells": [
   {
    "cell_type": "code",
-   "execution_count": 3,
+   "execution_count": 18,
    "metadata": {},
    "outputs": [
     {
@@ -10,8 +10,11 @@
      "output_type": "stream",
      "text": [
       "Total Votes: 3521001\n",
-      "[[\"O'Tooley\", 105630, 0.02999999147969569], ['Li', 492940, 0.13999996023857988], ['Correy', 704200, 0.19999994319797126], ['Khan', 2218231, 0.6300001050837531]]\n",
-      "Winner: Khan(2218231)\n"
+      " O'Tooley 105630 (3.0%)\n",
+      " Li 492940 (14.0%)\n",
+      " Correy 704200 (20.0%)\n",
+      " Khan 2218231 (63.0%)\n",
+      "Winner: Khan\n"
      ]
     }
    ],
@@ -53,97 +56,23 @@
     "maxvotes= 0\n",
     "winner = ''\n",
     "for item in tally:\n",
-    "    item[2]=item[1]/votecount\n",
+    "    item[2]=\"(\"+str(round(item[1]/votecount*100,1))+\"%)\"#multiply 100 for % and round to 1 decimal\n",
     "    if item[1] > maxvotes:\n",
     "        maxvotes = item[1]\n",
     "        winner = item[0]\n",
     "\n",
     "        \n",
     "#summarize, print to terminal, export to text\n",
-    "summary = \"\"\"Total Votes: {}\\n{}\\nWinner: {}({})\"\"\".format(votecount,tally,winner,maxvotes)\n",
+    "summary = \"\"\"Total Votes: {}\"\"\".format(votecount)\n",
+    "for row in tally:\n",
+    "    summary = summary+\"\\n\"\n",
+    "    for item in row:\n",
+    "        summary = summary+\" \"+str(item)\n",
+    "summary = summary+\"\\n\"+(\"Winner: {}\".format(winner))\n",
     "print(summary)\n",
     "textfile=open(\"summary.txt\",\"w+\")\n",
     "textfile.write(summary)\n",
     "textfile.close()"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 5,
-   "metadata": {},
-   "outputs": [
-    {
-     "data": {
-      "text/plain": [
-       "3521001"
-      ]
-     },
-     "execution_count": 5,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
-   "source": [
-    "data.unique()"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 18,
-   "metadata": {},
-   "outputs": [
-    {
-     "data": {
-      "text/plain": [
-       "{'jon', 'mark'}"
-      ]
-     },
-     "execution_count": 18,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
-   "source": [
-    "candidatelist=set(['jon','jon','mark'])\n",
-    "candidatelist"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 1,
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "test\n"
-     ]
-    }
-   ],
-   "source": [
-    "print('test')"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 2,
-   "metadata": {},
-   "outputs": [
-    {
-     "ename": "ValueError",
-     "evalue": "2218231 is not in list",
-     "output_type": "error",
-     "traceback": [
-      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
-      "\u001b[0;31mValueError\u001b[0m                                Traceback (most recent call last)",
-      "\u001b[0;32m<ipython-input-2-890d910e62ae>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mtally\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mindex\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmaxvotes\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
-      "\u001b[0;31mValueError\u001b[0m: 2218231 is not in list"
-     ]
-    }
-   ],
-   "source": [
-    "tally.index(maxvotes)"
    ]
   },
   {
